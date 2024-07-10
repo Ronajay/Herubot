@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 module.exports = {
   config: {
     name: "ai",
@@ -6,16 +8,24 @@ module.exports = {
     usage: "[ask]",
     accessableby: 0
   },
-  start: async function ({ text, reply, react, event}) {
-    let p = text.join(' '), uid = event.senderID;
-    const axios = require('axios');
-    if (!p) return reply('Please enter a prompt.');
+  start: async function ({ text, reply, react, event }) {
+    let prompt = text.join(' ');
+    let uid = event.senderID;
+
+    if (!prompt) {
+      return reply('Please enter a prompt.');
+    }
+
     react('✨');
+
     try {
-      const r = (await axios.get(`https://deku-rest-api.replit.app/gpt4?prompt=${p}&uid=${uid}`)).data;
-      return reply(r.gpt4 + "\n\nNOTE: THIS AI IS CONVERSATIONAL SO IF YOU WANT TO RESET YOUR CONVERSATION WITH AI TO GO BACK AGAIN TO THE BEGINNING  JUST TYPE “ai clear”");
-    } catch (g) {
-      return reply(g.message);
+      const response = await axios.get(`https://joshweb.click/api/gpt-4o`, {
+        params: { q: prompt, uid: uid }
+      });
+      const { gpt4 } = response.data;
+      return reply(`${gpt4}\n\nTpye “ai clear” to clear the conversation history`);
+    } catch (error) {
+      return reply(error.message);
     }
   }
-}
+};
