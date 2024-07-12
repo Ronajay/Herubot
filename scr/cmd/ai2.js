@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 module.exports = {
   config: {
     name: "ai2",
@@ -8,17 +6,16 @@ module.exports = {
     usage: "[ask]",
     accessableby: 0
   },
-  start: async function ({ text, reply, react, event }) {
+  start: async function ({ text, reply, react, event}) {
+    let p = text.join(' '), uid = event.senderID;
+    const axios = require('axios');
+    if (!p) return reply('Please enter a prompt.');
+    react('✨');
     try {
-      const response = await axios.post('https://joshweb.click/new/gpt-3_5-turbo', { prompt: text });
-      if (response.data && response.data.reply) {
-        await reply(response.data.reply);
-      } else {
-        await reply("No response received from the AI.");
-      }
-    } catch (error) {
-      console.error(error);
-      await reply("There was an error communicating with the AI.");
+      const r = (await axios.get(`https://markdevs-api.onrender.com/gpt3?prompt=${p}&uid=${uid}`)).data;
+      return reply("✅ + 𝙶𝚙𝚝3 𝙲𝚘𝚗𝚝𝚒𝚗𝚞𝚎𝚜 𝙲𝚘𝚗𝚟𝚎𝚛𝚜𝚊𝚝𝚒𝚘𝚗𝚊𝚕\n━━━━━━━━━━━━━━━━━━\n" + r.gpt3 + "\n━━━━━━━━━━━━━━━━━━\nType “ai clear” if you want to clear the conversations");
+    } catch (g) {
+      return reply(g.message);
     }
   }
-};
+}
