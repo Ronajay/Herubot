@@ -34,7 +34,7 @@ module["exports"] = {
 
       const { lyrics, title } = r.data;
 
-      const results = (await axios.get("https://deku-rest-api.replit.app/spotify?q="+q)).data
+      const results = (await axios.get("https://joshweb.click/search/spotify?q="+q)).data
 
       let url = results.result
 
