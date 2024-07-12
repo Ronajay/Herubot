@@ -21,7 +21,7 @@ module.exports.start = async function({ api, event, text }) {
         groupCount++; // Increment the group count
 
         const threadName = thread.name || ""; // Get the thread name, or an empty string if it doesn't exist
-        const msg = `━━━━━━━━━━━━━━━━━━\nNotification for group: ${threadName}\n━━━━━━━━━━━━━━━━━━\n\nMessage: ${message}\n━━━━━━━━━━━━━━━━━━`; // Construct the notification message
+        const msg = `🔔 𝐍𝐎𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍\n━━━━━━━━━━━━━━━━━━\nNotification for group: ${threadName}\n━━━━━━━━━━━━━━━━━━\n💌 Message: ${message}\n━━━━━━━━━━━━━━━━━━`; // Construct the notification message
 
         // Send the notification message to the current thread
         await api.sendMessage(msg, thread.threadID);
