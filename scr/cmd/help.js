@@ -14,8 +14,17 @@ module.exports = {
         .filter(file => file.endsWith(".js"))
         .map(file => require(`${path}/${file}`).config);
 
-      const page = parseInt(text[0], 10) || 1;
-      const commandsPerPage = 10;
+      let page;
+      let commandsPerPage;
+      
+      if (text[0] === "all") {
+        page = 1;
+        commandsPerPage = commands.length;
+      } else {
+        page = parseInt(text[0], 10) || 1;
+        commandsPerPage = 10;
+      }
+      
       const totalPages = Math.ceil(commands.length / commandsPerPage);
 
       if (page < 1 || page > totalPages) return reply("Invalid page number.");
