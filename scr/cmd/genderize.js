@@ -7,7 +7,7 @@ module["exports"] = class {
     usage: "[ask]",
     author: "Deku",
     react: "",
-    url: "https://deku-rest-api.replit.app/genderize?name=",
+    url: "https://joshweb.click/genderize?name=",
   };
   static async start({ reply, text }) {
     const axios = require("axios");
