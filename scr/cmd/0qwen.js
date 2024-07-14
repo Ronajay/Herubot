@@ -16,7 +16,7 @@ module["exports"] = class {
         await get("https://joshweb.click" + "/ai/qwen1.5-14b?q=" + encodeURI(ask) + '&uid=' + event.senderID)
       ).data;
      react('❤️');
-      return reply("✅ + 𝚀𝚠𝚎𝚗 𝙲𝚘𝚗𝚟𝚎𝚛𝚜𝚊𝚝𝚒𝚘𝚗𝚊𝚕 𝙰𝚒\n━━━━━━━━━━━━━━━━━━\n" +rest.result + '\n━━━━━━━━━━━━━━━━━━\nType «clear» if you clear the conversation');
+      return reply("🌺 | 𝚀𝚠𝚎𝚗 𝙲𝚘𝚗𝚝𝚒𝚗𝚞𝚎𝚜 𝙰𝚒\n━━━━━━━━━━━━━━━━━━\n" +rest.result + '\n━━━━━━━━━━━━━━━━━━\nType “qwen clear” if you want to clear the conversations');
     } catch (e) {
       return reply(e.message);
     }
