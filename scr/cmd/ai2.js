@@ -10,10 +10,10 @@ module.exports = {
     let p = text.join(' '), uid = event.senderID;
     const axios = require('axios');
     if (!p) return reply('Please enter a prompt.');
-    react('✨');
+    react('🤖');
     try {
       const r = (await axios.get(`https://markdevs-api.onrender.com/gpt3?prompt=${p}&uid=${uid}`)).data;
-      return reply("✅ + 𝙶𝚙𝚝3 𝙲𝚘𝚗𝚝𝚒𝚗𝚞𝚎𝚜 𝙲𝚘𝚗𝚟𝚎𝚛𝚜𝚊𝚝𝚒𝚘𝚗𝚊𝚕\n━━━━━━━━━━━━━━━━━━\n" + r.gpt3 + "\n━━━━━━━━━━━━━━━━━━\nType “ai clear” if you want to clear the conversations");
+      return reply("🌟 | 𝙶𝚙𝚝3 𝙲𝚘𝚗𝚝𝚒𝚗𝚞𝚎𝚜 𝙰𝚒\n━━━━━━━━━━━━━━━━━━\n" + r.gpt3 + "\n━━━━━━━━━━━━━━━━━━\nType “ai clear” if you want to clear the conversations");
     } catch (g) {
       return reply(g.message);
     }
