@@ -13,6 +13,7 @@ module.exports = {
     react('🖤');
     try {
       const r = (await axios.get(`https://joshweb.click/api/blackboxai?q=${p}&uid=${uid}`)).data;
+      react('✅');
       return reply("⚫ | 𝙱𝚕𝚊𝚌𝚔𝚋𝚘𝚡 𝙲𝚘𝚗𝚝𝚒𝚗𝚞𝚎𝚜 𝙰𝚒\n━━━━━━━━━━━━━━━━━━\n" + r.result + "\n━━━━━━━━━━━━━━━━━━\nType “blackbox clear” if you want to clear the conversations");
     } catch (g) {
       return reply(g.message);
