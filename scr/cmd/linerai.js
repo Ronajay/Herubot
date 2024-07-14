@@ -20,7 +20,7 @@ module.exports.start = async function ({ api, event, text }) {
     const response = await axios.get(`https://my-api-v1.onrender.com/api/liner?prompt=${encodeURIComponent(prompt)}`);
     const result = response.data.result;
 
-    return api.sendMessage(result, event.threadID, event.messageID);
+    return api.sendMessage("🤍 | 𝙻𝚒𝚗𝚎𝚛𝚊𝚒 𝚁𝚎𝚜𝚙𝚘𝚗𝚜𝚎\n━━━━━━━━━━━━━━━━━━\n" + result, event.threadID, event.messageID);
   } catch (error) {
     console.error(`Error querying the API: ${error.message}`);
     return api.sendMessage("Failed to query the API. Please try again later.", event.threadID, event.messageID);
