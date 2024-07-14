@@ -16,7 +16,7 @@ module["exports"] = class {
         await get("https://joshweb.click" + "/pai/luffy?q=" + encodeURI(ask) + '&uid=' + event.senderID)
       ).data;
      react('👊');
-      return reply("✅ + 𝙲𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛 𝙰𝚒\n━━━━━━━━━━━━━━━━━━\n" +rest.result + '\n━━━━━━━━━━━━━━━━━━\nType «clear» to clear the conversation');
+      return reply("😁 | 𝙻𝚞𝚏𝚏𝚢 𝙲𝚘𝚗𝚝𝚒𝚗𝚞𝚎𝚜 𝙰𝚒\n━━━━━━━━━━━━━━━━━━\n" +rest.result + '\n━━━━━━━━━━━━━━━━━━\nType “luffy clear” if you want to clear the conversations');
     } catch (e) {
       return reply(e.message);
     }
