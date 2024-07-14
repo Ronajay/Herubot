@@ -20,7 +20,7 @@ module.exports.start = async function ({ api, event, text }) {
     const response = await axios.get(`https://my-api-v1.onrender.com/api/v1/gpt4?ask=${encodeURIComponent(query)}`);
     const answer = response.data.answer;
 
-    return api.sendMessage(answer, event.threadID, event.messageID);
+    return api.sendMessage("🤖 | 𝙶𝚙𝚝4 (𝚗𝚘𝚗-𝚌𝚘𝚗𝚟𝚎𝚛𝚜𝚊𝚝𝚒𝚘𝚗𝚊𝚕)\n━━━━━━━━━━━━━━━━━━\n" + answer, event.threadID, event.messageID);
   } catch (error) {
     console.error(`Error querying the API: ${error.message}`);
     return api.sendMessage("Failed to query the API. Please try again later.", event.threadID, event.messageID);
