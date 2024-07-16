@@ -1,50 +1,42 @@
-module.exports = {
-  config: {
-    name: "help",
-    accessableby: 0,
-    usage: "[page]",
-    prefix: true
-  },
-  start: async function ({ text, reply }) {
-    const fs = require("fs");
-    try {
-      const path = process.cwd() + "/scr/cmd";
-      const files = fs.readdirSync(path);
-      const commands = files
-        .filter(file => file.endsWith(".js"))
-        .map(file => require(`${path}/${file}`).config);
+module.exports.config = {
+  name: 'help',
+  version: '1.0.0',
+  role: 0,
+  hasPrefix: false,
+  aliases: ['help'],
+  description: "Beginner's guide",
+  usage: "Help [page] or [command]",
+  credits: 'jay | rona',
+};
 
-      let page;
-      let commandsPerPage;
-      
-      if (text[0] === "all") {
-        page = 1;
-        commandsPerPage = commands.length;
-      } else {
-        page = parseInt(text[0], 10) || 1;
-        commandsPerPage = 10;
-      }
-      
-      const totalPages = Math.ceil(commands.length / commandsPerPage);
-
-      if (page < 1 || page > totalPages) return reply("Invalid page number.");
-
-      const startIndex = (page - 1) * commandsPerPage;
-      const commandList = commands.slice(startIndex, startIndex + commandsPerPage);
-
-      let output = "━━𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂━━\n";
-      commandList.forEach((command, index) => {
-        output += ` ⊂⊃ ➥ ${command.name}\n`;
+module.exports.run = async function({ api, event, enableCommands, args, Utils, prefix }) {
+  const input = args.join(' ');
+  try {
+    const eventCommands = enableCommands[1].handleEvent;
+    const commands = enableCommands[0].commands;
+    if (!input) {
+      let helpMessage = `Command List:\n\n`;
+      commands.forEach((c, i) => {
+        helpMessage += `\t${i + 1}. ${prefix}${c}\n`;
       });
-      output += "━━━━━━━━━━━━━━━\n";
-      output += `━━𝙲𝙾𝙼𝙼𝙰𝙽𝙳 𝙿𝙰𝙶𝙴 : <${page}/${totalPages}>━━\n`;
-      output += "━━HERU CHATBOT AI━━\n";
-      output += `Total commands: ${commands.length}\n`;
-      output += `Type "help all" to see all commands.`;
-
-      return reply({ body: output });
-    } catch (error) {
-      return reply(error.message);
+      helpMessage += `\nEvent List:\n\n`;
+      eventCommands.forEach((e, i) => {
+        helpMessage += `\t${i + 1}. ${prefix}${e}\n`;
+      });
+      helpMessage += `\nPage 1/1`;
+      api.sendMessage(helpMessage, event.threadID, event.messageID);
+    } else {
+      api.sendMessage('Command not found.', event.threadID, event.messageID);
     }
+  } catch (error) {
+    console.log(error);
   }
 };
+
+module.exports.handleEvent = async function({ api, event, prefix }) {
+  const { threadID, messageID, body } = event;
+  const message = prefix ? 'This is my prefix: ' + prefix : "Sorry i don't have prefix";
+  if (body?.toLowerCase().startsWith('prefix')) {
+    api.sendMessage(message, threadID, messageID);
+  }
+  }
